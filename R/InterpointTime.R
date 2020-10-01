@@ -8,6 +8,8 @@
 #' @param DateTime quoted name of column in data that has DateTime values in the format YYYY-mm-dd HH:MM:SS
 #' @importFrom dplyr lead
 #' @return A vector of times differnces in seconds between adjacent points in an animal track
+#' PointDurLag_sec is the time difference between the point and the proceeding point
+#' PointDurLead_sec is the time difference between the point and the following point
 #' @export
 #############################################################################################
 # Calculate time between points in a timeseries
@@ -27,7 +29,14 @@ InterpointTime<-function(tracks, ID="File", DateTime="DateTime"){
     Data$PointDur <- NA
     Data$PointDur <- lead(Data[[DateTime]]) - Data[[DateTime]]
 
-    dataOut<-c(dataOut,Data$PointDur)
+    Data$PointDurLag_sec <- NA
+    Data$PointDurLag_sec <- difftime(Data[[DateTime]], dplyr::lag(Data[[DateTime]], 1),units = "secs")
+
+    Data$PointDurLead_sec <- NA
+    Data$PointDurLead_sec <- difftime( dplyr::lead(Data[[DateTime]]), Data[[DateTime]],units = "secs")
+
+
+    dataOut<-c(dataOut,Data$PointDur,Data$PointDur_sec)
   }
 
   return(dataOut)

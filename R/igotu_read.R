@@ -8,7 +8,8 @@
 #'
 #' The objective of this function to parse the igotu files (file sturcture
 #' shown above) and specifically count the number of satelites that were
-#' registered in the last column.
+#' registered in the last column. NOTE: it takes a long time to run & I am sure
+#' there are ways to make it go faster!
 #'
 #' @author Rachael A. Orben \email{rachael.orben@@oregonstate.edu}
 #' @param file file with the structure from above
