@@ -1,3 +1,27 @@
+#' igotu_read function is specifically for reading in the long format log files
+#'
+#' Index Date	       Time	    Latitude	 Longitude	 Altitude	 Speed	  Course	 Distance	 Type	        Timeout	 MSVs_QCN	 Weight Criteria	 SleepTime	 EHPE	     Satelite ID	  Satelite
+#'   1	 2000/00/00	 04:00:00	-213.05751 -181.193954 -15137926	1526868	231	     0	       00(00000000)	14	     B0	       A1	               94	        0	         -1599995880	  X-X----- X-X---X- -------- ---XX---
+#'   2	 2015/04/30	 22:32:16	0	         0	         21.859999	0	      0	       0	       -2(000000D2)	14	     B0	       A1	               111	      0	         0	            -------- -------- -------- --------
+#'   3	 2015/04/30	 22:32:59	44.622578	-124.045845	 11.16	    0	      291	     0	       00(00000000)	42	     C8	       3E	               0	        3008	     671354896	    --X-X--- -----X-- ---X---- ---X----
+#'   4	 2015/04/30	 22:33:00	44.622578	-124.045845	 11.16	    0	      291	     0	       00(00000000)	1	       B8	       45	               0	        2832	     671354896	    --X-X--- -----X-- ---X---- ---X----
+#'
+#' The objective of this function to parse the igotu files (file sturcture
+#' shown above) and specifically count the number of satelites that were
+#' registered in the last column.
+#'
+#' @author Rachael A. Orben \email{rachael.orben@@oregonstate.edu}
+#' @param file file with the structure from above
+#' @return A new data frame with Index, DateTime, la, lon, Altitude, Speed,
+#' Course, Distance, EHPE, and SatNum
+#'
+#' all original data plus two new columns: TripNum
+#'   (consecutive trip number 0 = at colony) and ColonyMovement (in/out colony
+#'   movements)
+#' @importFrom dplyr lead bind_rows
+#' @export
+
+
 #Function takes in file name of igotu file w/ satelite data
 
 igotu_read <- function(file) {
@@ -36,6 +60,7 @@ igotu_read <- function(file) {
                    Speed=as.numeric(data$Speed),
                    Course=as.numeric(data$Course),
                    Distance=as.numeric(data$Distance),
+                   EHPE=data$EHPE,
                    SatNum)
   return(Locs)
 }
