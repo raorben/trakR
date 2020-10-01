@@ -5,7 +5,7 @@
 #' with GPS tracking data from seabirds that during the breeding season are
 #' central place foragers, leaving from colony sites on food finding trips and
 #' returning to the colony afterward.  This function relies on a column with a
-#' disntance in km from each point along the track to the colony and a distance
+#' distance in km from each point along the track to the colony and a distance
 #' cutoff.  It numbers each trip starting with the first point beyond the
 #' distance cutoff and ending with the last point beyond the cutoff with a
 #' sequential number starting with 1.  All points inside the cutoff are labled
