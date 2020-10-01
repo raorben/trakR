@@ -36,7 +36,7 @@ InterpointTime<-function(tracks, ID="File", DateTime="DateTime"){
     Data$PointDurLead_sec <- difftime( dplyr::lead(Data[[DateTime]]), Data[[DateTime]],units = "secs")
 
 
-    dataOut<-c(dataOut,Data$PointDur,Data$PointDur_sec)
+    dataOut<-c(dataOut,Data$PointDur,Data$PointDurLag_sec,Data$PointDurLead_sec)
   }
 
   return(dataOut)
