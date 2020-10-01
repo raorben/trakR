@@ -3,14 +3,16 @@
 #' The objective of this function to to partition diving data into "dives"
 #' based on begining and returning to a fixed location (the surface).
 #' It was based on the MakeTrip codes.  This function relies on a column with a
-#' distance in m from each point along the track to the colony and a distance
-#' cutoff.  It numbers each dive starting with the first point beyond the
-#' distance cutoff and ending with the last point beyond the cutoff with a
-#' sequential number starting with 1.  There is also a time gap column and criteria to
-#' prevent dives from spanning over unsampled intervals. All points inside
-#' the cutoff (surface) are labled 0.  In the future it could be nice to have
-#' these labeled with sequetial numbers as well. The input variables are identified by
-#' column index numbers in the data.frame (tracks).
+#' depth typically in m, a depth cut off below which dives start, but also the user
+#' can specify what depth must be reached to indicate a dive and also specify a time
+#' gap limit.  It numbers each dive starting with the first point beyond the
+#' depth cutoff and ending with the last point beyond the cutoff with a
+#' sequential number starting with 1.  All points inside the cutoff (surface) are
+#' labled 0. Output is just the input variables and a counter column. Depth values can
+#' no include NA.
+#'
+#' In the future it could be nice to have these labeled with sequetial numbers as well.
+#' The input variables are identified by column index numbers in the data.frame (tracks).
 #'
 #' @author Rachael A. Orben & Abram B. Fleishman \email{abram@@conservationmetrics.com}
 #' @param tracks data.frame of data that you want to parse into trips
